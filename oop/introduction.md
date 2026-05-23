@@ -84,3 +84,13 @@ Here:
 - Both are created from the Employee class
 
 ## Four Pillars of OOP
+
+Object-Oriented Programming (OOPS) is mainly based on four important concepts called the four pillars of OOPS:
+
+1. Encapsulation: Encapsulation is the process of binding data and methods together into a single unit (class) and restricting direct access to some data.
+
+2. Abstraction: Abstraction means hiding internal implementation details and showing only essential features to the user.
+
+3. Inheritance: Inheritance is the process where one class acquires properties and methods of another class.
+
+4. Polymorphism: Polymorphism means one method or function can behave differently in different situations.
