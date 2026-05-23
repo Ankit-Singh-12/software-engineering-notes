@@ -4,7 +4,7 @@ Encapsulation is an OOPS concept in which data members and methods are combined 
 
 Simple terms: “Keep data and the functions that work on that data together in one unit (a class), and control how the data is accessed or modified from outside.”
 
-> **ProTip:** Encapsulation = wrapping + access control.
+> Encapsulation = wrapping + access control.
 
 In OOP theory, encapsulation has two sides:
 
@@ -16,13 +16,13 @@ In OOP theory, encapsulation has two sides:
 
     Restrict direct access to an object’s internal state and force others to use a controlled interface (methods, properties).
 
-In Python:
+In Python. we achieve encapsulation by:
 
-- You still bundle attributes and methods inside classes.
+- We bundle attributes and methods inside classes.
 
 - Access control is done by convention and name mangling, not by strict keywords like private/protected.
 
-- You often use:
+- We often use:
 
     - Public attributes/methods
 
