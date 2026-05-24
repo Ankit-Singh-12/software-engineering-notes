@@ -137,7 +137,7 @@ This is strong evidence of encapsulation: the internal representation is hidden,
 
 > **Note:** **@property** is a decorator in Python that allows a method to be accessed like an attribute. It is mainly used for encapsulation, validation, and controlled access to class data.
 
-## Why encapsulation is used
+## Why Encapsulation is used
 
 - ### Data Protection / Integrity
 
