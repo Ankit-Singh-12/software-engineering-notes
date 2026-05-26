@@ -25,7 +25,7 @@ What SOLID stands for:
 
 > **A class should have only one reason to change.**
 
-This means that a class should have only one responsibility, as expressed through its methods. If a class takes care of more than one task, then you should separate those tasks into dedicated classes with descriptive names.
+This means that a class should have only one responsibility, as expressed through its methods. If a class takes care of more than one task, then we should separate those tasks into dedicated classes with descriptive names.
 
 In detail:
 
@@ -503,3 +503,107 @@ Good interview angle:
 
 ## 5. Dependency Inversion Principle (DIP)
 
+> Abstractions should not depend upon details. Details should depend upon abstractions.
+
+High‑level code should depend on abstractions, not concrete low‑level details. Both high‑level and low‑level parts should depend on a common abstraction.
+
+In detail:
+
+- High‑level modules = business rules, core logic (e.g., OrderService, PaymentService).
+
+- Low‑level modules = details like database, HTTP, file system, specific APIs.
+
+- Without DIP:
+
+    - High‑level code imports and constructs concrete classes directly (e.g., OrderService creates MySQLOrderRepository inside).
+
+    - This makes it hard to change DB or to test with mocks.
+
+- With DIP:
+
+    - High‑level code depends on an abstraction (e.g., OrderRepository interface / protocol).
+
+    - Concrete classes (MySQLOrderRepository, InMemoryOrderRepository) implement that abstraction.
+
+    - An external piece (like a “composition root”, framework, or factory) wires them together.
+
+Python perspective:
+
+- We often pass dependencies through:
+
+    - Constructor injection (__init__ parameters)
+
+    - Method injection (pass dependency as argument)
+
+- Rely on ABCs or simple “duck typed” protocols for the abstraction.
+
+- This makes unit tests easy: inject a fake or in‑memory implementation.
+
+Code Example:
+
+Say we’re building an application and have a FrontEnd class to display data to the users in a friendly way. The app currently gets its data from a database, so we end up with the following code:
+
+```python
+class FrontEnd:
+    def __init__(self, back_end):
+        self.back_end = back_end
+
+    def display_data(self):
+        data = self.back_end.get_data_from_database()
+        print("Display data:", data)
+
+class BackEnd:
+    def get_data_from_database(self):
+        return "Data from the database"
+```
+
+In this example, the FrontEnd class depends on the BackEnd class and its concrete implementation. We can say that both classes are tightly coupled. This coupling can lead to scalability issues. For example, say that our app is growing fast, and we want the app to be able to read data from a REST API. How would we do that?
+
+We may consider adding a new method to BackEnd to retrieve the data from the REST API. However, that will also require us to modify FrontEnd, which should be closed to modification according to the open-closed principle.
+
+To fix the issue, we can apply the dependency inversion principle and make our classes depend on abstractions rather than on concrete implementations like BackEnd. In this specific example, we can introduce a DataSource class that provides the interface to use in our concrete classes:
+
+```python
+from abc import ABC, abstractmethod
+
+class FrontEnd:
+    def __init__(self, data_source):
+        self.data_source = data_source
+
+    def display_data(self):
+        data = self.data_source.get_data()
+        print("Display data:", data)
+
+class DataSource(ABC):
+    @abstractmethod
+    def get_data(self):
+        pass
+
+class Database(DataSource):
+    def get_data(self):
+        return "Data from the database"
+
+class API(DataSource):
+    def get_data(self):
+        return "Data from the API"
+```
+
+In this redesigned code, we’ve added a DataSource class as an abstraction that provides the required interface, consisting of the .get_data() method. Note how FrontEnd now depends on the interface provided by DataSource, which is an abstraction.
+
+Then we define the Database class, which is a concrete implementation for those cases where we want to retrieve the data from our database. This class depends on the DataSource abstraction through inheritance. Finally, we define the API class to support retrieving the data from the REST API. This class also depends on the DataSource abstraction.
+
+Here’s how we can use the FrontEnd class in our code:
+
+```python
+>>> from app_dip import API, Database, FrontEnd
+
+>>> db_front_end = FrontEnd(Database())
+>>> db_front_end.display_data()
+Display data: Data from the database
+
+>>> api_front_end = FrontEnd(API())
+>>> api_front_end.display_data()
+Display data: Data from the API
+```
+
+Here, we first initialize FrontEnd using a Database object and then again using an API object. Every time we call .display_data(), the result will depend on the concrete data source that we use. Note that we can also change the data source dynamically by reassigning the .data_source attribute in our FrontEnd instance.
