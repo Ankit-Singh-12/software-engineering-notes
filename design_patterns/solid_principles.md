@@ -607,3 +607,39 @@ Display data: Data from the API
 ```
 
 Here, we first initialize FrontEnd using a Database object and then again using an API object. Every time we call .display_data(), the result will depend on the concrete data source that we use. Note that we can also change the data source dynamically by reassigning the .data_source attribute in our FrontEnd instance.
+
+Good interview angle:
+
+> We can say: “I usually inject collaborators via the constructor and depend on protocols or ABCs. That way I can swap implementations (e.g., real DB vs in‑memory) without changing high‑level code, and testing becomes straightforward.”
+
+## One liner table
+
+| Principle | One‑line idea                    | Key Python idea                                          |
+| --------- | -------------------------------- | -------------------------------------------------------- |
+| SRP       | One reason to change             | Split classes/functions by concern                       |
+| OCP       | Extend, don’t modify             | Use polymorphism, strategies                             |
+| LSP       | Subclass must be safe substitute | Avoid surprising overrides, prefer composition if needed |
+| ISP       | Many small interfaces            | Use small ABCs/protocols                                 |
+| DIP       | Depend on abstractions           | Inject dependencies, use ABCs/protocols                  |
+
+
+## How SOLID fits with other OOP concepts
+
+- Inheritance
+    - Used in OCP and LSP, but use carefully.
+
+- Polymorphism
+    - Very important for OCP and DIP.
+
+- Abstraction
+    - Important for DIP and ISP.
+
+- Encapsulation
+    - Helps keep classes clean and focused, supports SRP.
+
+- Composition
+    - Often better than inheritance for flexible design.
+
+## Summary
+
+“SOLID helps us design classes and modules that are easy to maintain and extend. SRP says one class should do one thing, OCP says we should extend behavior without modifying existing code, LSP says subclasses should be safely replaceable for their parent classes, ISP says interfaces should be small and specific, and DIP says high-level code should depend on abstractions rather than concrete classes.”
