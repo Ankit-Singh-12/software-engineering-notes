@@ -30,7 +30,7 @@ Imagine that you’re creating a logistics management application. The first ver
 
 After a while, your app becomes pretty popular. Each day you receive dozens of requests from sea transportation companies to incorporate sea logistics into the app.
 
-![Python Logo](images\problem1-en-1.5x.png)
+![image](images/problem1-en-1.5x.png)
 *Figure: Adding a new class to the program isn’t that simple if the rest of the code is already coupled to existing classes.*
 
 Great news, right? But how about the code? At present, most of your code is coupled to the Truck class. Adding Ships into the app would require making changes to the entire codebase. Moreover, if later you decide to add another type of transportation to the app, you will probably need to make all of these changes again.
