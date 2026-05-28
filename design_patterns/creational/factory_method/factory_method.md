@@ -1,6 +1,8 @@
 # Factory Method
 
-Factory Method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+> Factory method is a creational design pattern which solves the problem of creating product objects without specifying their concrete classes.
+
+It is pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
 
 At the core of the Factory Method pattern is the concept of delegation. Instead of the client code directly creating objects, it delegates the responsibility to a Factory Method.
 
