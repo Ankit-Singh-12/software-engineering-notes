@@ -8,7 +8,11 @@ At the core of the Factory Method pattern is the concept of delegation. Instead 
 
 This method resides in an abstract Creator class or interface, defining an interface for creating objects. Concrete subclasses of the Creator implement this Factory Method, allowing them to create specific instances of objects. This delegation promotes loose coupling between the client code and the objects it uses, enhancing flexibility and maintainability.
 
-**Idea of Factory Method**
+> **The Core Idea:** "Don't use ClassName() directly. Instead, call a method/function that creates and returns the object for you."
+
+> **The problem it solves:** when your code uses Dog() or Cat() directly, it's tightly coupled — changing the class name breaks everything. A factory hides that creation logic behind one clean method.
+
+### Idea of Factory Method
 
 - Normally, to create an object, we write: obj = SomeClass().
 
